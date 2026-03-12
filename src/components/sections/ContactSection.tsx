@@ -20,10 +20,16 @@
             <h2 className="text-[28px] font-semibold text-[#caa081] sm:text-[32px]">
               Contactanos
             </h2>
-            <p className="text-sm text-white/80">Estamos para ayudarte</p>
+            <p className="text-sm text-white">Estamos para ayudarte</p>
           </div>
 
           <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#caa081] px-6 py-3 text-sm font-medium text-white sm:w-fit">
+            <img
+              src="/whatsapp.svg"
+              alt=""
+              aria-hidden="true"
+              className="h-5 w-5 brightness-0 invert"
+            />
             Contactanos por Whatsapp
           </button>
 
