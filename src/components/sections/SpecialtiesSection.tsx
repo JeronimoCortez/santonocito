@@ -49,7 +49,10 @@ export const SpecialtiesSection = () => {
   };
 
   return (
-    <div className="relative flex w-full flex-col items-start gap-10 bg-[#ba95781a] px-6 py-16 sm:px-8 md:px-12 lg:px-24 lg:py-[100px] xl:flex-row xl:items-center xl:gap-4 xl:px-40">
+    <section
+      id="especialidades"
+      className="relative flex w-full scroll-mt-[90px] flex-col items-start gap-10 bg-[#ba95781a] px-6 py-16 sm:px-8 md:px-12 lg:px-24 lg:py-[100px] xl:flex-row xl:items-center xl:gap-4 xl:px-40"
+    >
       <div
         className="flex w-full flex-col items-start gap-6 lg:flex-1"
         data-reveal="fade-up"
@@ -120,6 +123,6 @@ export const SpecialtiesSection = () => {
         alt="Vector"
         src="/vector-200-2.svg"
       />
-    </div>
+    </section>
   );
 };

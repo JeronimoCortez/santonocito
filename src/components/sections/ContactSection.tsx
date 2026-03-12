@@ -1,6 +1,9 @@
 ﻿export const ContactSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-black/70 px-6 py-12 sm:px-8 md:px-12 lg:px-24 lg:py-[60px] xl:px-40">
+    <section
+      id="contacto"
+      className="relative w-full scroll-mt-[90px] overflow-hidden bg-black/70 px-6 py-12 sm:px-8 md:px-12 lg:px-24 lg:py-[60px] xl:px-40"
+    >
       <div className="absolute inset-0">
         <div
           className="h-full w-full bg-cover bg-center opacity-60"

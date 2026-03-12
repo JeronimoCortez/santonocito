@@ -1,6 +1,9 @@
 export const HeroSection = () => {
   return (
-    <header className="relative flex w-full flex-col items-center justify-center gap-6 overflow-hidden px-6 py-10 text-center sm:px-8 md:min-h-[488px] md:flex-row md:items-center md:justify-center md:gap-[60px] md:px-12 md:py-[60px] md:text-left lg:px-24 xl:px-40">
+    <header
+      id="inicio"
+      className="relative flex w-full scroll-mt-[90px] flex-col items-center justify-center gap-6 overflow-hidden px-6 py-10 text-center sm:px-8 md:min-h-[488px] md:flex-row md:items-center md:justify-center md:gap-[60px] md:px-12 md:py-[60px] md:text-left lg:px-24 xl:px-40"
+    >
       <div className="absolute inset-0 bg-[url('/hero.webp')] bg-cover bg-center opacity-40" />
       <div className="absolute inset-0 bg-black/60" />
       <div

@@ -29,10 +29,10 @@ export const Contenedor = () => {
         <ContactSection />
 
         <footer
-          className="flex w-full h-auto items-center justify-center gap-[60px] px-6 py-8 md:px-12 md:py-10 lg:h-[51px] lg:p-[60px] relative bg-transparent"
+          className="relative w-full bg-transparent px-6 py-8 sm:px-8 md:px-12 md:py-10 lg:px-24 lg:py-[60px] xl:px-40"
           data-reveal="fade-up"
         >
-          <div className="flex w-full flex-wrap items-center justify-center gap-4 lg:h-12 lg:flex-nowrap lg:gap-5 lg:mt-[-58.50px] lg:mb-[-58.50px]">
+          <div className="mx-auto flex w-full max-w-[var(--layout-max)] flex-wrap items-center justify-center gap-4 lg:flex-nowrap lg:gap-5">
             <p className="flex items-center justify-center w-fit [font-family:'Roboto-Regular',Helvetica] font-normal text-variable-collection-color-princial-2 text-sm text-center leading-7 whitespace-normal break-words relative tracking-[0]">
               © 2023 Santonocito &amp; Asociados
             </p>

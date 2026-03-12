@@ -25,7 +25,10 @@ const features = [
 
 export const WhyChooseUsSection = () => {
   return (
-    <div className="relative flex w-full flex-col items-center justify-center gap-10 overflow-hidden bg-[#faf8f7] px-6 py-12 sm:px-8 md:px-12 lg:min-h-[614px] lg:gap-[60px] lg:px-24 lg:py-[60px] xl:px-40">
+    <section
+      id="por-que"
+      className="relative flex w-full scroll-mt-[90px] flex-col items-center justify-center gap-10 overflow-hidden bg-[#faf8f7] px-6 py-12 sm:px-8 md:px-12 lg:min-h-[614px] lg:gap-[60px] lg:px-24 lg:py-[60px] xl:px-40"
+    >
       <div
         className="flex w-full flex-col items-center gap-6"
         data-reveal="fade-up"
@@ -76,6 +79,6 @@ export const WhyChooseUsSection = () => {
         alt="Vector"
         src="/vector-200-4.svg"
       />
-    </div>
+    </section>
   );
 };

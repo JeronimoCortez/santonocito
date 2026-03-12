@@ -25,13 +25,17 @@ export const NavigationMenuSection = () => {
   return (
     <nav className="fixed top-0 left-0 z-[50] w-full bg-white">
       <div className="flex w-full items-center justify-between gap-4 px-6 py-3 md:h-[67px] md:px-12 md:py-0 lg:px-24 xl:px-40">
-        <div className="flex items-center h-[40px] md:h-full w-[220px] shrink-0">
+        <a
+          href="#inicio"
+          className="flex items-center h-[40px] md:h-full w-[220px] shrink-0"
+          aria-label="Ir al inicio"
+        >
           <img
             className="h-[40px] w-auto max-w-full object-contain"
             alt="Logo"
             src="/logo.webp"
           />
-        </div>
+        </a>
 
         <div className="hidden items-center gap-6 xl:flex">
           {navItems.map((item) => (

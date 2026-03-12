@@ -93,19 +93,25 @@ export const TestimonialsSection = () => {
   };
 
   return (
-    <div className="relative flex w-full flex-col items-center justify-center gap-10 overflow-hidden bg-[linear-gradient(0deg,rgba(186,149,120,0.1)_0%,rgba(186,149,120,0.1)_100%)] px-6 py-12 sm:px-8 md:px-12 lg:min-h-[832px] lg:gap-[60px] lg:px-24 lg:py-[60px] xl:px-40">
+    <section
+      id="testimonios"
+      className="relative flex w-full scroll-mt-[90px] flex-col items-center justify-center gap-10 overflow-hidden bg-cover bg-center px-6 py-12 sm:px-8 md:px-12 lg:min-h-[832px] lg:gap-[60px] lg:px-24 lg:py-[60px] xl:px-40"
+      style={{ backgroundImage: "url('/testimonios-fondo.webp')" }}
+    >
+      <div className="absolute inset-0 bg-[#BA9578]/10" />
+
       <div
-        className="flex w-full flex-col items-center gap-6"
+        className="relative z-10 flex w-full flex-col items-center gap-6"
         data-reveal="fade-up"
       >
-        <p className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-variable-collection-color-princial-2 text-[32px] leading-[38px] md:text-[40px] md:leading-[48px] text-center relative tracking-[0]">
+        <p className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-[#5E4F4A] text-[32px] leading-[38px] md:text-[40px] md:leading-[48px] text-center relative tracking-[0]">
           Lo que dicen nuestros clientes
         </p>
       </div>
 
       <div
         ref={viewportRef}
-        className={`w-full overflow-hidden select-none touch-pan-y ${
+        className={`relative z-10 w-full overflow-hidden select-none touch-pan-y ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
         onPointerDown={handlePointerDown}
@@ -153,7 +159,7 @@ export const TestimonialsSection = () => {
       </div>
 
       <div
-        className="relative flex items-center justify-center gap-3"
+        className="relative z-10 flex items-center justify-center gap-3"
         data-reveal="fade-up"
         style={{ ["--reveal-delay" as string]: "200ms" }}
       >
@@ -172,10 +178,10 @@ export const TestimonialsSection = () => {
       </div>
 
       <img
-        className="absolute w-full left-0 bottom-0 h-px object-cover"
+        className="absolute z-10 w-full left-0 bottom-0 h-px object-cover"
         alt="Vector"
         src="/vector-200-5.svg"
       />
-    </div>
+    </section>
   );
 };

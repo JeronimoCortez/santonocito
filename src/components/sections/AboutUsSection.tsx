@@ -1,6 +1,9 @@
 export const AboutUsSection = () => {
   return (
-    <div className="relative flex w-full flex-col items-center gap-10 overflow-hidden px-6 py-12 sm:px-8 md:px-12 lg:px-24 xl:min-h-[802px] xl:gap-[60px] xl:px-40 xl:py-[60px]">
+    <section
+      id="quienes-somos"
+      className="relative flex w-full scroll-mt-[90px] flex-col items-center gap-10 overflow-hidden px-6 py-12 sm:px-8 md:px-12 lg:px-24 xl:min-h-[802px] xl:gap-[60px] xl:px-40 xl:py-[60px]"
+    >
       <div
         className="flex w-full flex-col items-center gap-6"
         data-reveal="fade-up"
@@ -105,6 +108,6 @@ export const AboutUsSection = () => {
         alt="Vector"
         src="/vector-200-3.svg"
       />
-    </div>
+    </section>
   );
 };
