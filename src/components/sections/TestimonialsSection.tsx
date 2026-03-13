@@ -1,24 +1,34 @@
 ﻿"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import type {
+  PointerEvent as ReactPointerEvent,
+  TouchEvent as ReactTouchEvent,
+} from "react";
+
+/**
+ * FONT CHANGE: Se reemplazó 'Gotham Gold' (paga) por 'Playfair Display' (Google Fonts, gratuita).
+ * Playfair Display es una serif de alto contraste con un carácter editorial muy similar a Gotham Gold
+ * en peso visual y elegancia. Solo se usa para las comillas decorativas, igual que antes.
+ *
+ * Para activarla, agregar en el <head> del layout o _document:
+ * <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+ */
 
 const testimonials = [
   {
     id: 1,
-    text:
-      "Destacó la excelencia profesional de la Dra. Antonieta Santonocito y su compromiso en el abordaje de asuntos de familia. Actúa con gran eficacia, rapidez y de manera expeditiva, brindando explicaciones claras y precisas que generan confianza y tranquilidad. Su trato humano, empático y respetuoso, junto con una escucha atenta y sensible, marca una diferencia fundamental en momentos personales complejos. Asimismo, se caracteriza por su criterio justo y transparente en la determinación de honorarios. Una profesional íntegra y altamente recomendable.",
+    text: "Destacó la excelencia profesional de la Dra. Antonieta Santonocito y su compromiso en el abordaje de asuntos de familia. Actúa con gran eficacia, rapidez y de manera expeditiva, brindando explicaciones claras y precisas que generan confianza y tranquilidad. Su trato humano, empático y respetuoso, junto con una escucha atenta y sensible, marca una diferencia fundamental en momentos personales complejos. Asimismo, se caracteriza por su criterio justo y transparente en la determinación de honorarios. Una profesional íntegra y altamente recomendable.",
     author: "Laura Castro",
   },
   {
     id: 2,
-    text:
-      "Llegué a la doctora, a través de varias vías, ya que tanto una trabajadora social amiga me la sugirió, como así también la hija de otra amiga, a quien le había llevado su caso de familia, por lo que no dudé en contactarla. Tuve la bendición de encontrarme, no solo con una profesional afiladisima sobre derechos de la mujer y la protección de los niños, sino también con un ser humano que supo contenerme, motivarme y acompañarme en un proceso que para mí no era, ni fácil, ni simple, ni agradable, un divorcio y una división de bienes, fruto de una separación de más de 13 años sin acuerdos y que se resolvió en menos de un año. Mi eterna gratitud y mi super recomendación.",
+    text: "Llegué a la doctora, a través de varias vías, ya que tanto una trabajadora social amiga me la sugirió, como así también la hija de otra amiga, a quien le había llevado su caso de familia, por lo que no dudé en contactarla. Tuve la bendición de encontrarme, no solo con una profesional afiladisima sobre derechos de la mujer y la protección de los niños, sino también con un ser humano que supo contenerme, motivarme y acompañarme en un proceso que para mí no era, ni fácil, ni simple, ni agradable, un divorcio y una división de bienes, fruto de una separación de más de 13 años sin acuerdos y que se resolvió en menos de un año. Mi eterna gratitud y mi super recomendación.",
     author: "Crsitina",
   },
   {
     id: 3,
-    text:
-      "Después de años de casada me tocó la triste realidad de muchas mujeres, que fue quedar viuda, y mi marido al tener hijos biológicos de antes de nuestra unión, comenzó mi realidad de tener que buscar una abogada que defendiera los bienes que habíamos adquirido juntos durante nuestro matrimonio. Fue un proceso legal largo, en el cual Antonieta estuvo ayudándome a sobrellevar todo esto que era nuevo y difícil para mí, ya que solo habían pasado unos meses de la partida de mi marido. Fueron varias las veces que tuvimos que mediar con las otras partes para llegar a un acuerdo, su apoyo en cuanto a lo emocional lo tengo que destacar, porque repito solo habían pasado unos meses desde que enviudé y el acompañamiento de Antonieta como mi abogada fue mi mejor elección, es por ella es que hoy tengo mi parte de la herencia que me correspondía y que me querían sacar. Mucho que agradecer y absolutamente nada que reprochar ya que fue mi abogada y por momentos una amiga que me aconsejo sin soltarme la mano.",
+    text: "Después de años de casada me tocó la triste realidad de muchas mujeres, que fue quedar viuda, y mi marido al tener hijos biológicos de antes de nuestra unión, comenzó mi realidad de tener que buscar una abogada que defendiera los bienes que habíamos adquirido juntos durante nuestro matrimonio. Fue un proceso legal largo, en el cual Antonieta estuvo ayudándome a sobrellevar todo esto que era nuevo y difícil para mí, ya que solo habían pasado unos meses de la partida de mi marido. Fueron varias las veces que tuvimos que mediar con las otras partes para llegar a un acuerdo, su apoyo en cuanto a lo emocional lo tengo que destacar, porque repito solo habían pasado unos meses desde que enviudé y el acompañamiento de Antonieta como mi abogada fue mi mejor elección, es por ella es que hoy tengo mi parte de la herencia que me correspondía y que me querían sacar. Mucho que agradecer y absolutamente nada que reprochar ya que fue mi abogada y por momentos una amiga que me aconsejo sin soltarme la mano.",
     author: "Carmen",
   },
 ];
@@ -30,6 +40,20 @@ export const TestimonialsSection = () => {
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const startXRef = useRef(0);
+  const startYRef = useRef(0);
+
+  /**
+   * FIX CARRUSEL MOBILE — problema raíz:
+   * El elemento tenía `touch-pan-y` en Tailwind, lo que debería permitir scroll vertical
+   * y entregar el horizontal al componente, pero el uso de onPointerDown/Move/Up
+   * en combinación con setPointerCapture() interfería con el scroll nativo del navegador
+   * en iOS/Android, haciendo que los gestos se cancelaran o no se registraran.
+   *
+   * Solución: se reemplaza el sistema de Pointer Events por Touch Events nativos
+   * (onTouchStart / onTouchMove / onTouchEnd). Esto da control total sobre el gesto
+   * horizontal sin interferir con el scroll vertical del navegador.
+   * Se elimina también el cursor-grab ya que no aplica en touch.
+   */
 
   useEffect(() => {
     if (!viewportRef.current) return;
@@ -62,30 +86,79 @@ export const TestimonialsSection = () => {
     return base - dragOffset;
   }, [activeIndex, slideWidth, dragOffset]);
 
-  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+  // ── Touch handlers (mobile) ──────────────────────────────────────────────────
+
+  const handleTouchStart = (e: ReactTouchEvent<HTMLDivElement>) => {
     if (!slideWidth) return;
-    setIsDragging(true);
-    startXRef.current = event.clientX;
+    const touch = e.touches[0];
+    startXRef.current = touch.clientX;
+    startYRef.current = touch.clientY;
     setDragOffset(0);
-    event.currentTarget.setPointerCapture(event.pointerId);
+    setIsDragging(true);
   };
 
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+  const handleTouchMove = (e: ReactTouchEvent<HTMLDivElement>) => {
     if (!isDragging) return;
-    const delta = event.clientX - startXRef.current;
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - startXRef.current;
+    const deltaY = touch.clientY - startYRef.current;
+
+    // Si el gesto es predominantemente vertical, no interceptamos (dejamos scroll).
+    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+      setIsDragging(false);
+      setDragOffset(0);
+      return;
+    }
+
+    // Gesto horizontal confirmado: prevenimos el scroll de la página.
+    e.preventDefault();
+    setDragOffset(deltaX);
+  };
+
+  const handleTouchEnd = (e: ReactTouchEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    const touch = e.changedTouches[0];
+    const delta = touch.clientX - startXRef.current;
+    const threshold = Math.min(60, slideWidth * 0.15); // umbral más pequeño en touch
+
+    if (delta < -threshold && activeIndex < maxIndex) {
+      setActiveIndex((i) => i + 1);
+    } else if (delta > threshold && activeIndex > 0) {
+      setActiveIndex((i) => i - 1);
+    }
+
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
+  // ── Pointer handlers (desktop) ───────────────────────────────────────────────
+
+  const handlePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    // Solo activar con mouse (no touch — lo maneja el bloque anterior)
+    if (e.pointerType === "touch") return;
+    if (!slideWidth) return;
+    setIsDragging(true);
+    startXRef.current = e.clientX;
+    setDragOffset(0);
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "touch" || !isDragging) return;
+    const delta = e.clientX - startXRef.current;
     setDragOffset(delta);
   };
 
-  const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
-    event.currentTarget.releasePointerCapture(event.pointerId);
-    const delta = event.clientX - startXRef.current;
+  const endPointerDrag = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === "touch" || !isDragging) return;
+    e.currentTarget.releasePointerCapture(e.pointerId);
+    const delta = e.clientX - startXRef.current;
     const threshold = Math.min(120, slideWidth * 0.2);
 
     if (delta < -threshold && activeIndex < maxIndex) {
-      setActiveIndex(activeIndex + 1);
+      setActiveIndex((i) => i + 1);
     } else if (delta > threshold && activeIndex > 0) {
-      setActiveIndex(activeIndex - 1);
+      setActiveIndex((i) => i - 1);
     }
 
     setIsDragging(false);
@@ -109,22 +182,36 @@ export const TestimonialsSection = () => {
         </p>
       </div>
 
+      {/*
+       * FIX CARRUSEL MOBILE:
+       * - Se agrega `touch-action: pan-y` vía style inline para que el navegador
+       *   solo tome control del scroll vertical; el horizontal lo interceptamos nosotros.
+       * - Se añaden los handlers onTouchStart/Move/End para gestos táctiles.
+       * - Se mantienen los handlers de Pointer para mouse (desktop).
+       * - Se eliminó cursor-grab en mobile (sin efecto en táctil y evita bugs en iOS).
+       */}
       <div
         ref={viewportRef}
-        className={`relative z-10 w-full overflow-hidden select-none touch-pan-y ${
-          isDragging ? "cursor-grabbing" : "cursor-grab"
+        className={`relative z-10 w-full overflow-hidden select-none ${
+          isDragging ? "cursor-grabbing" : "lg:cursor-grab"
         }`}
+        style={{ ["--reveal-delay" as string]: "120ms", touchAction: "pan-y" }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-        onPointerLeave={endDrag}
+        onPointerUp={endPointerDrag}
+        onPointerCancel={endPointerDrag}
         data-reveal="fade-up"
-        style={{ ["--reveal-delay" as string]: "120ms" }}
       >
         <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${translateX}px)` }}
+          className="flex"
+          style={{
+            transform: `translateX(-${translateX}px)`,
+            // Desactivar transición durante el arrastre para seguir el dedo sin lag
+            transition: isDragging ? "none" : "transform 500ms ease-in-out",
+          }}
         >
           {testimonials.map((testimonial) => (
             <div
@@ -132,20 +219,29 @@ export const TestimonialsSection = () => {
               className="flex shrink-0 justify-center lg:justify-start"
               style={{ width: slideWidth || "100%" }}
             >
-              <div className="flex h-auto w-[85vw] flex-col items-center justify-center gap-2.5 rounded-[10px] bg-white sm:w-[540px] lg:min-h-[535px] lg:w-full xl:w-[835px]">
-                <div className="w-full max-w-[735px] mt-[-1.00px] [font-family:'Gotham-Bold',Helvetica] font-bold text-[#5d4e49] text-7xl md:text-9xl leading-7 relative tracking-[0]">
-                  &quot;
+              <div className="flex h-auto w-[88vw] flex-col items-center justify-center gap-2.5 rounded-[10px] bg-white sm:w-[540px] lg:min-h-[535px] lg:w-full xl:w-[835px]">
+                {/*
+                 * FONT FIX: Se reemplaza [font-family:'Gotham',Helvetica] (Gotham Gold, paga)
+                 * por [font-family:'Playfair_Display',serif] (Google Fonts, gratuita).
+                 * Playfair Display bold tiene el mismo peso visual y el mismo carácter
+                 * editorial de las comillas decorativas grandes.
+                 */}
+                <div
+                  className="w-full max-w-[735px] mt-[-1.00px] font-bold text-[#5d4e49] text-7xl md:text-9xl leading-7 relative tracking-[0] px-6 sm:px-[50px] pt-6"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  &ldquo;
                 </div>
 
                 <div className="items-center px-6 sm:px-[50px] py-4 self-stretch w-full flex-[0_0_auto] flex gap-4 relative rounded-md">
                   <div className="flex flex-col items-start gap-2 relative flex-1 grow">
-                    <p className="mt-[-1.00px] [font-family:'Gotham-Book',Helvetica] font-normal text-[#1e1e1e] text-base relative self-stretch tracking-[0] leading-6">
+                    <p className="mt-[-1.00px] [font-family:'Gotham-Book',Helvetica] font-normal text-[#1e1e1e] text-[15px] sm:text-base relative self-stretch tracking-[0] leading-6">
                       {testimonial.text}
                     </p>
                   </div>
                 </div>
 
-                <div className="h-10 items-center justify-center px-10 py-4 self-stretch w-full flex gap-4 relative rounded-md">
+                <div className="h-10 items-center justify-center px-6 sm:px-10 py-4 self-stretch w-full flex gap-4 relative rounded-md mb-2">
                   <div className="flex-col items-center justify-center gap-2 mt-[-8.00px] mb-[-8.00px] flex relative flex-1 grow">
                     <div className="mt-[-1.00px] [font-family:'Gotham-Bold',Helvetica] font-bold text-[#5e4f4a] text-lg relative self-stretch tracking-[0] leading-6">
                       {testimonial.author}
@@ -167,7 +263,7 @@ export const TestimonialsSection = () => {
           <button
             key={testimonial.id}
             onClick={() => setActiveIndex(index)}
-            className={`w-2 h-2 rounded ${
+            className={`w-2.5 h-2.5 rounded transition-colors duration-300 ${
               index === activeIndex
                 ? "bg-[#5d4e49]"
                 : "border border-solid border-[#5e4f4a]"
