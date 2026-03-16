@@ -12,10 +12,7 @@
       </div>
 
       <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
-        <div
-          className="flex w-full flex-col gap-6"
-          data-reveal="fade-up"
-        >
+        <div className="flex w-full flex-col gap-6" data-reveal="fade-up">
           <div className="flex flex-col gap-2">
             <h2 className="text-[28px] font-semibold text-[#caa081] sm:text-[32px]">
               Contactanos
@@ -33,10 +30,16 @@
             Contactanos por Whatsapp
           </button>
 
-          <div className="w-full max-w-[460px] overflow-hidden rounded-2xl bg-white/10 p-3 shadow-soft">
+          <div className="w-full max-w-[460px] overflow-hidden rounded-2xl bg-white/10 ">
             <div className="aspect-[4/3] w-full rounded-xl bg-white/80">
               <div className="flex h-full w-full items-center justify-center text-xs text-black/60">
-                Google Maps iframe
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3346.52461439549!2d-68.79232569999999!3d-32.9899418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e0cb9f2dcf31b%3A0x85f0d75aa6a8e1f6!2sOzamis%20467%2C%20Maip%C3%BA%2C%20Mendoza!5e0!3m2!1ses!2sar!4v1773703699576!5m2!1ses!2sar"
+                  width="100%"
+                  height="100%"
+                  className="border:0;"
+                  loading="lazy"
+                ></iframe>
               </div>
             </div>
           </div>

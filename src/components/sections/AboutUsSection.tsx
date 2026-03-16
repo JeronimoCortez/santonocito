@@ -8,7 +8,7 @@ export const AboutUsSection = () => {
         className="flex w-full flex-col items-center gap-6"
         data-reveal="fade-up"
       >
-        <div className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-variable-collection-color-princial-2 text-[32px] leading-[38px] md:text-[40px] md:leading-[48px] text-center relative tracking-[0]">
+        <div className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-[#5E4F4A] text-[32px] leading-[38px] md:text-[40px] md:leading-[48px] text-center relative tracking-[0]">
           Quienes somos
         </div>
 
@@ -103,11 +103,6 @@ export const AboutUsSection = () => {
         </div>
       </div>
 
-      <img
-        className="absolute w-full left-0 bottom-0 h-px object-cover"
-        alt="Vector"
-        src="/vector-200-3.svg"
-      />
     </section>
   );
 };

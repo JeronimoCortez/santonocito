@@ -51,22 +51,22 @@ export const SpecialtiesSection = () => {
   return (
     <section
       id="especialidades"
-      className="relative flex w-full scroll-mt-[90px] flex-col items-start gap-10 bg-[#ba95781a] px-6 py-16 sm:px-8 md:px-12 lg:px-24 lg:py-[100px] xl:flex-row xl:items-center xl:gap-4 xl:px-40"
+      className="relative flex w-full scroll-mt-[90px] flex-col items-start gap-10 bg-[#ba95781a] px-6 py-16 sm:px-8 md:px-12 lg:px-24 lg:py-[100px] xl:flex-row xl:items-center xl:gap-4 2xl:gap-8 xl:px-40"
     >
       <div
-        className="flex w-full flex-col items-start gap-6 lg:flex-1"
+        className="flex max-w-[400px] flex-col items-start gap-6 lg:flex-1"
         data-reveal="fade-up"
       >
-        <div className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-variable-collection-color-princial-2 text-[32px] leading-[38px] md:text-[40px] md:leading-[48px] relative tracking-[0]">
+        <div className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-[#5E4F4A] text-[32px] leading-[38px] md:text-[40px] md:leading-[48px] relative tracking-[0]">
           Nuestras especialidades
         </div>
 
-        <p className="self-stretch [font-family:'Gotham-Book',Helvetica] font-normal text-textos-descriptivos text-lg leading-6 relative tracking-[0]">
+        <p className="self-stretch [font-family:'Gotham-Book',Helvetica] font-normal text-[#444444] text-lg leading-6 relative tracking-[0]">
           Acompañamos a personas y empresas en las siguientes áreas:
         </p>
       </div>
 
-      <div className="grid w-full grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 xl:flex-1 xl:max-w-[748px]">
+      <div className="grid w-full grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 xl:flex-1 ">
         {specialties.map((specialty) => {
           const isOpen = !!openIds[specialty.id];
           const detailsId = `specialty-details-${specialty.id}`;
@@ -79,14 +79,14 @@ export const SpecialtiesSection = () => {
                 ["--reveal-delay" as string]: `${specialty.id * 120}ms`,
               }}
             >
-              <div className="flex flex-1 items-start gap-4 p-[30px] bg-white border-b-4 [border-bottom-style:solid] border-variable-collection-color-princial-1 rounded-md">
+              <div className="flex flex-1 items-start gap-4 p-[30px] bg-white border-b-4 [border-bottom-style:solid] border-[#B99578] rounded-md">
                 <div className="flex min-w-0 flex-1 flex-col items-start justify-center">
-                  <div className="[font-family:'Gotham-Bold',Helvetica] font-bold text-variable-collection-color-princial-2 text-xl leading-7 tracking-[0]">
+                  <div className="[font-family:'Gotham-Bold',Helvetica] font-bold text-[#5E4F4A] text-xl leading-7 tracking-[0]">
                     {specialty.title}
                   </div>
                   <button
                     type="button"
-                    className="mt-2 w-fit [font-family:'Gotham-Light',Helvetica] text-sm font-light text-variable-collection-color-princial-2 underline-offset-4 hover:underline"
+                    className="mt-2 w-fit [font-family:'Gotham-Light',Helvetica] text-sm font-light text-[#5E4F4A] underline-offset-4 hover:underline"
                     onClick={() => toggle(specialty.id)}
                     aria-expanded={isOpen}
                     aria-controls={detailsId}
@@ -99,10 +99,10 @@ export const SpecialtiesSection = () => {
                       isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                     }`}
                   >
-                    <p className="mt-2 text-sm text-[#5d4e49] leading-6">
+                    <p className="mt-2 text-sm text-[#444444] leading-6">
                       {specialty.summary}
                     </p>
-                    <p className="mt-2 text-sm text-[#1e1e1e] leading-6">
+                    <p className="mt-2 text-sm text-[#444444] leading-6">
                       {specialty.details}
                     </p>
                   </div>
@@ -118,11 +118,6 @@ export const SpecialtiesSection = () => {
         })}
       </div>
 
-      <img
-        className="absolute w-full left-0 bottom-0 h-px object-cover"
-        alt="Vector"
-        src="/vector-200-2.svg"
-      />
     </section>
   );
 };

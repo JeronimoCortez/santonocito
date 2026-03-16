@@ -1,8 +1,71 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-BookItalic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-ThinItalic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-XLight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Gotham-XLightItalic.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+}
+
 :root {
   --textos-descriptivos: rgba(68, 68, 68, 1);
-  --variable-collection-color-princial-1: rgba(185, 149, 120, 1);
+  --variable-collection-color-princial-1: rgb(185, 149, 120);
   --variable-collection-color-princial-2: rgba(94, 79, 74, 1);
   --color-ink-primary: #1e1e1e;
   --color-ink-muted: #5d4e49;
@@ -25,10 +88,11 @@
 
   body {
     min-height: 100%;
-    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    /* font-family: var(--font-geist-sans), system-ui, sans-serif; */
     background: #ffffff;
     color: var(--color-ink-primary);
     line-height: 1.5;
+    font-family: 'Gotham', sans-serif;
   }
 
   img,

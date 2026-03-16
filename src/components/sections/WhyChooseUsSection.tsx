@@ -33,7 +33,7 @@ export const WhyChooseUsSection = () => {
         className="flex w-full flex-col items-center gap-6"
         data-reveal="fade-up"
       >
-        <div className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-variable-collection-color-princial-2 text-[32px] leading-[38px] md:text-[40px] md:leading-[48px] text-center relative tracking-[0]">
+        <div className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-[#5E4F4A] text-[32px] leading-[38px] md:text-[40px] md:leading-[48px] text-center relative tracking-[0]">
           ¿Por qué elegirnos?
         </div>
 
@@ -42,17 +42,17 @@ export const WhyChooseUsSection = () => {
         </div>
       </div>
 
-      <div className="flex w-full flex-col items-center justify-center gap-6 px-0 py-5 lg:flex-row lg:flex-wrap lg:justify-center">
+      <div className="flex w-full flex-col items-center justify-center gap-12 px-0 py-5 lg:flex-row lg:justify-center">
         {features.map((feature, index) => (
           <div
             key={index}
-            className="flex w-full items-center gap-10 md:flex-1"
+            className="flex w-full items-center gap-10 lg:w-[calc(50%-1rem)] xl:w-[calc(33%-1rem)]"
             data-reveal="fade-up"
             style={{ ["--reveal-delay" as string]: `${index * 120}ms` }}
           >
-            <div className="items-center p-4 flex-1 grow flex gap-4 relative rounded-md">
-              <div className="relative flex items-center justify-center w-16 h-16 sm:w-[100px] sm:h-[100px]">
-                <div className="absolute inset-0 rounded-full bg-[#BA9578] " />
+            <div className="items-center p-4 w-full flex gap-4 relative rounded-md">
+              <div className="relative flex items-center justify-center w-16 h-16 sm:w-[100px] sm:h-[100px] shrink-0">
+                <div className="absolute inset-0 rounded-full bg-[#BA9578]" />
                 <img
                   className={`relative ${feature.iconSize}`}
                   alt={feature.alt}
@@ -60,12 +60,11 @@ export const WhyChooseUsSection = () => {
                 />
               </div>
 
-              <div className="flex flex-col items-start gap-2 relative flex-1 grow">
-                <div className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-[#5d4e49] text-xl leading-7 relative tracking-[0]">
+              <div className="flex flex-col items-start gap-2 relative flex-1">
+                <div className="self-stretch [font-family:'Gotham-Bold',Helvetica] font-bold text-[#5d4e49] text-xl leading-7 tracking-[0]">
                   {feature.title}
                 </div>
-
-                <div className="[font-family:'Gotham-Book',Helvetica] font-normal text-[#1e1e1e] text-base relative self-stretch tracking-[0] leading-6">
+                <div className="[font-family:'Gotham-Book',Helvetica] font-normal text-[#1e1e1e] text-md self-stretch tracking-[0] leading-6">
                   {feature.description}
                 </div>
               </div>
@@ -73,12 +72,6 @@ export const WhyChooseUsSection = () => {
           </div>
         ))}
       </div>
-
-      <img
-        className="absolute w-full left-0 bottom-0 h-px object-cover"
-        alt="Vector"
-        src="/vector-200-4.svg"
-      />
     </section>
   );
 };

@@ -1,19 +1,6 @@
 ﻿"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type {
-  PointerEvent as ReactPointerEvent,
-  TouchEvent as ReactTouchEvent,
-} from "react";
-
-/**
- * FONT CHANGE: Se reemplazó 'Gotham Gold' (paga) por 'Playfair Display' (Google Fonts, gratuita).
- * Playfair Display es una serif de alto contraste con un carácter editorial muy similar a Gotham Gold
- * en peso visual y elegancia. Solo se usa para las comillas decorativas, igual que antes.
- *
- * Para activarla, agregar en el <head> del layout o _document:
- * <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
- */
 
 const testimonials = [
   {
@@ -88,7 +75,7 @@ export const TestimonialsSection = () => {
 
   // ── Touch handlers (mobile) ──────────────────────────────────────────────────
 
-  const handleTouchStart = (e: ReactTouchEvent<HTMLDivElement>) => {
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!slideWidth) return;
     const touch = e.touches[0];
     startXRef.current = touch.clientX;
@@ -97,7 +84,7 @@ export const TestimonialsSection = () => {
     setIsDragging(true);
   };
 
-  const handleTouchMove = (e: ReactTouchEvent<HTMLDivElement>) => {
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!isDragging) return;
     const touch = e.touches[0];
     const deltaX = touch.clientX - startXRef.current;
@@ -115,7 +102,7 @@ export const TestimonialsSection = () => {
     setDragOffset(deltaX);
   };
 
-  const handleTouchEnd = (e: ReactTouchEvent<HTMLDivElement>) => {
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!isDragging) return;
     const touch = e.changedTouches[0];
     const delta = touch.clientX - startXRef.current;
@@ -133,7 +120,7 @@ export const TestimonialsSection = () => {
 
   // ── Pointer handlers (desktop) ───────────────────────────────────────────────
 
-  const handlePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     // Solo activar con mouse (no touch — lo maneja el bloque anterior)
     if (e.pointerType === "touch") return;
     if (!slideWidth) return;
@@ -143,13 +130,13 @@ export const TestimonialsSection = () => {
     e.currentTarget.setPointerCapture(e.pointerId);
   };
 
-  const handlePointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType === "touch" || !isDragging) return;
     const delta = e.clientX - startXRef.current;
     setDragOffset(delta);
   };
 
-  const endPointerDrag = (e: ReactPointerEvent<HTMLDivElement>) => {
+  const endPointerDrag = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.pointerType === "touch" || !isDragging) return;
     e.currentTarget.releasePointerCapture(e.pointerId);
     const delta = e.clientX - startXRef.current;
@@ -195,7 +182,7 @@ export const TestimonialsSection = () => {
         className={`relative z-10 w-full overflow-hidden select-none ${
           isDragging ? "cursor-grabbing" : "lg:cursor-grab"
         }`}
-        style={{ ["--reveal-delay" as string]: "120ms", touchAction: "pan-y" }}
+        style={{ touchAction: "pan-y" }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -204,6 +191,7 @@ export const TestimonialsSection = () => {
         onPointerUp={endPointerDrag}
         onPointerCancel={endPointerDrag}
         data-reveal="fade-up"
+        // style={{ ["--reveal-delay" as string]: "120ms", touchAction: "pan-y" }}
       >
         <div
           className="flex"
@@ -219,18 +207,13 @@ export const TestimonialsSection = () => {
               className="flex shrink-0 justify-center lg:justify-start"
               style={{ width: slideWidth || "100%" }}
             >
-              <div className="flex h-auto w-[88vw] flex-col items-center justify-center gap-2.5 rounded-[10px] bg-white sm:w-[540px] lg:min-h-[535px] lg:w-full xl:w-[835px]">
-                {/*
-                 * FONT FIX: Se reemplaza [font-family:'Gotham',Helvetica] (Gotham Gold, paga)
-                 * por [font-family:'Playfair_Display',serif] (Google Fonts, gratuita).
-                 * Playfair Display bold tiene el mismo peso visual y el mismo carácter
-                 * editorial de las comillas decorativas grandes.
-                 */}
-                <div
-                  className="w-full max-w-[735px] mt-[-1.00px] font-bold text-[#5d4e49] text-7xl md:text-9xl leading-7 relative tracking-[0] px-6 sm:px-[50px] pt-6"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
-                >
-                  &ldquo;
+               <div className="flex h-auto w-[92vw] flex-col items-center justify-center gap-2.5 rounded-[10px] bg-white sm:w-[560px] lg:min-h-[535px] lg:w-full xl:w-[95%]">
+                <div className="w-full px-6 sm:px-[50px] mt-[-1.00px] pt-6">
+                  <img
+                    src="/comillas.webp"
+                    alt="Comillas"
+                    className="h-10 w-auto sm:h-12 md:h-16 lg:h-20"
+                  />
                 </div>
 
                 <div className="items-center px-6 sm:px-[50px] py-4 self-stretch w-full flex-[0_0_auto] flex gap-4 relative rounded-md">
@@ -241,7 +224,7 @@ export const TestimonialsSection = () => {
                   </div>
                 </div>
 
-                <div className="h-10 items-center justify-center px-6 sm:px-10 py-4 self-stretch w-full flex gap-4 relative rounded-md mb-2">
+                <div className="h-10 items-center justify-center px-6 sm:px-[50px] sm:px-10 py-4 self-stretch w-full flex gap-4 relative rounded-md mb-2">
                   <div className="flex-col items-center justify-center gap-2 mt-[-8.00px] mb-[-8.00px] flex relative flex-1 grow">
                     <div className="mt-[-1.00px] [font-family:'Gotham-Bold',Helvetica] font-bold text-[#5e4f4a] text-lg relative self-stretch tracking-[0] leading-6">
                       {testimonial.author}
@@ -273,11 +256,7 @@ export const TestimonialsSection = () => {
         ))}
       </div>
 
-      <img
-        className="absolute z-10 w-full left-0 bottom-0 h-px object-cover"
-        alt="Vector"
-        src="/vector-200-5.svg"
-      />
+
     </section>
   );
 };

@@ -33,11 +33,7 @@ export const HeroSection = () => {
         </button>
       </div>
 
-      <img
-        className="absolute w-full left-0 bottom-0 h-px object-cover z-10"
-        alt="Vector"
-        src="/vector-200.svg"
-      />
+
     </header>
   );
 };

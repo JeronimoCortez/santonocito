@@ -29,11 +29,11 @@ export const Contenedor = () => {
         <ContactSection />
 
         <footer
-          className="relative w-full bg-transparent px-6 py-8 sm:px-8 md:px-12 md:py-10 lg:px-24 lg:py-[60px] xl:px-40"
-          data-reveal="fade-up"
+          className="relative w-full bg-transparent px-2 py-4 "
+          // data-reveal="fade-up"
         >
           <div className="mx-auto flex w-full max-w-[var(--layout-max)] flex-wrap items-center justify-center gap-4 lg:flex-nowrap lg:gap-5">
-            <p className="flex items-center justify-center w-fit [font-family:'Roboto-Regular',Helvetica] font-normal text-variable-collection-color-princial-2 text-sm text-center leading-7 whitespace-normal break-words relative tracking-[0]">
+            <p className="flex items-center justify-center w-fit [font-family:'Roboto-Regular',Helvetica] font-normal text-[#5E4F4A] text-sm text-center leading-7 whitespace-normal break-words relative tracking-[0]">
               © 2023 Santonocito &amp; Asociados
             </p>
 
@@ -52,13 +52,13 @@ export const Contenedor = () => {
                 <circle cx="12" cy="10" r="2.5" />
               </svg>
 
-              <p className="flex items-center w-fit [font-family:'Roboto-Regular',Helvetica] font-normal text-variable-collection-color-princial-2 text-sm leading-7 whitespace-normal break-words relative tracking-[0]">
+              <p className="flex items-center w-fit [font-family:'Roboto-Regular',Helvetica] font-normal text-[#5E4F4A] text-sm leading-7 whitespace-normal break-words relative tracking-[0]">
                 Ozamis Centro 467 · Maipú · Mendoza
               </p>
             </div>
 
             <div className="inline-flex items-center justify-center gap-2.5 relative flex-[0_0_auto]">
-              <div className="w-3.5 h-[13.99px] relative bg-[url(/vector-2.svg)] bg-[100%_100%] flex items-center justify-center">
+              <div className="w-3.5 h-[13.99px] relative bg-[100%_100%] flex items-center justify-center">
                 <img
                   className="w-[70%] h-[70%]"
                   alt="Vector"
@@ -66,14 +66,14 @@ export const Contenedor = () => {
                 />
               </div>
 
-              <p className="flex items-center justify-center w-fit mt-[-1.00px] [font-family:'Roboto-Regular',Helvetica] font-normal text-variable-collection-color-princial-2 text-sm text-center leading-7 whitespace-normal break-words relative tracking-[0]">
+              <p className="flex items-center justify-center w-fit mt-[-1.00px] [font-family:'Roboto-Regular',Helvetica] font-normal text-[#5E4F4A] text-sm text-center leading-7 whitespace-normal break-words relative tracking-[0]">
                 +54 9 2615 325937 / +54 9 2615 53-1704
               </p>
             </div>
 
             <div className="inline-flex items-center justify-center gap-2.5 relative flex-[0_0_auto]">
               <svg
-                className="h-4 w-4 shrink-0 text-variable-collection-color-princial-2"
+                className="h-4 w-4 shrink-0 text-[#5E4F4A]"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -86,7 +86,7 @@ export const Contenedor = () => {
                 <path d="m22 8-10 6L2 8" />
               </svg>
 
-              <div className="flex items-center justify-center w-fit [font-family:'Roboto-Regular',Helvetica] font-normal text-variable-collection-color-princial-2 text-sm text-center leading-7 whitespace-normal break-words relative tracking-[0]">
+              <div className="flex items-center justify-center w-fit [font-family:'Roboto-Regular',Helvetica] font-normal text-[#5E4F4A] text-sm text-center leading-7 whitespace-normal break-words relative tracking-[0]">
                 santonocitoasociados@gmail.com
               </div>
             </div>
