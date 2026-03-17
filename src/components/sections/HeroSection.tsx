@@ -26,9 +26,9 @@ export const HeroSection = () => {
 
         <button className="all-[unset] box-border inline-flex flex-col items-start gap-3 relative flex-[0_0_auto]">
           <div className="flex flex-col items-center justify-center px-[30px] py-3 relative self-stretch w-full flex-[0_0_auto] bg-[#B99578] rounded-lg">
-            <div className="w-fit mt-[-1.00px] [font-family:'Gotham-Book',Helvetica] font-normal text-white text-base leading-6 whitespace-normal text-center relative tracking-[0]">
+            <a href="#contacto" className="w-fit mt-[-1.00px] [font-family:'Gotham-Book',Helvetica] font-normal text-white text-base leading-6 whitespace-normal text-center relative tracking-[0]">
               Solicitá tu consulta hoy
-            </div>
+            </a>
           </div>
         </button>
       </div>

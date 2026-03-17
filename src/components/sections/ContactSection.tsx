@@ -1,4 +1,65 @@
-﻿export const ContactSection = () => {
+﻿const COUNTRY_CODES = [
+  { code: "+54", label: "🇦🇷 +54" },
+  { code: "+591", label: "🇧🇴 +591" },
+  { code: "+55", label: "🇧🇷 +55" },
+  { code: "+56", label: "🇨🇱 +56" },
+  { code: "+57", label: "🇨🇴 +57" },
+  { code: "+506", label: "🇨🇷 +506" },
+  { code: "+53", label: "🇨🇺 +53" },
+  { code: "+593", label: "🇪🇨 +593" },
+  { code: "+503", label: "🇸🇻 +503" },
+  { code: "+502", label: "🇬🇹 +502" },
+  { code: "+509", label: "🇭🇹 +509" },
+  { code: "+504", label: "🇭🇳 +504" },
+  { code: "+52", label: "🇲🇽 +52" },
+  { code: "+505", label: "🇳🇮 +505" },
+  { code: "+507", label: "🇵🇦 +507" },
+  { code: "+595", label: "🇵🇾 +595" },
+  { code: "+51", label: "🇵🇪 +51" },
+  { code: "+1787", label: "🇵🇷 +1787" },
+  { code: "+1809", label: "🇩🇴 +1809" },
+  { code: "+598", label: "🇺🇾 +598" },
+  { code: "+58", label: "🇻🇪 +58" },
+  { code: "+34", label: "🇪🇸 +34" },
+  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+44", label: "🇬🇧 +44" },
+  { code: "+33", label: "🇫🇷 +33" },
+  { code: "+49", label: "🇩🇪 +49" },
+  { code: "+39", label: "🇮🇹 +39" },
+  { code: "+351", label: "🇵🇹 +351" },
+  { code: "+61", label: "🇦🇺 +61" },
+  { code: "+81", label: "🇯🇵 +81" },
+  { code: "+86", label: "🇨🇳 +86" },
+  { code: "+91", label: "🇮🇳 +91" },
+  { code: "+7", label: "🇷🇺 +7" },
+  { code: "+27", label: "🇿🇦 +27" },
+  { code: "+234", label: "🇳🇬 +234" },
+  { code: "+20", label: "🇪🇬 +20" },
+  { code: "+971", label: "🇦🇪 +971" },
+  { code: "+966", label: "🇸🇦 +966" },
+  { code: "+82", label: "🇰🇷 +82" },
+  { code: "+62", label: "🇮🇩 +62" },
+  { code: "+60", label: "🇲🇾 +60" },
+  { code: "+63", label: "🇵🇭 +63" },
+  { code: "+65", label: "🇸🇬 +65" },
+  { code: "+66", label: "🇹🇭 +66" },
+  { code: "+84", label: "🇻🇳 +84" },
+  { code: "+212", label: "🇲🇦 +212" },
+  { code: "+213", label: "🇩🇿 +213" },
+  { code: "+216", label: "🇹🇳 +216" },
+  { code: "+380", label: "🇺🇦 +380" },
+  { code: "+48", label: "🇵🇱 +48" },
+  { code: "+31", label: "🇳🇱 +31" },
+  { code: "+32", label: "🇧🇪 +32" },
+  { code: "+41", label: "🇨🇭 +41" },
+  { code: "+43", label: "🇦🇹 +43" },
+  { code: "+46", label: "🇸🇪 +46" },
+  { code: "+47", label: "🇳🇴 +47" },
+  { code: "+45", label: "🇩🇰 +45" },
+  { code: "+358", label: "🇫🇮 +358" },
+];
+
+export const ContactSection = () => {
   return (
     <section
       id="contacto"
@@ -20,7 +81,12 @@
             <p className="text-sm text-white">Estamos para ayudarte</p>
           </div>
 
-          <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#caa081] px-6 py-3 text-sm font-medium text-white sm:w-fit">
+          <a
+            href="https://wa.me/5492615325937?text=Hola!%20Santonocito%20y%20Asociados,%20necesito%20consultarles%20sobre%20sus%20servicios"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#caa081] px-6 py-3 text-sm font-medium text-white sm:w-fit"
+          >
             <img
               src="/whatsapp.svg"
               alt=""
@@ -28,7 +94,7 @@
               className="h-5 w-5 brightness-0 invert"
             />
             Contactanos por Whatsapp
-          </button>
+          </a>
 
           <div className="w-full max-w-[460px] overflow-hidden rounded-2xl bg-white/10 ">
             <div className="aspect-[4/3] w-full rounded-xl bg-white/80">
@@ -81,10 +147,15 @@
             <div className="grid gap-3 sm:grid-cols-[120px_1fr]">
               <label className="text-xs text-white/80">
                 Código
-                <select className="mt-2 w-full rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white focus:border-white focus:outline-none">
-                  <option className="text-black" value="+54-261">
-                    +54 9 261
-                  </option>
+                <select
+                  defaultValue="+54"
+                  className="mt-2 w-full rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white focus:border-white focus:outline-none"
+                >
+                  {COUNTRY_CODES.map(({ code, label }) => (
+                    <option key={code} className="text-black" value={code}>
+                      {label}
+                    </option>
+                  ))}
                 </select>
               </label>
 

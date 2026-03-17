@@ -24,7 +24,7 @@ export const NavigationMenuSection = () => {
 
   return (
     <nav className="fixed top-0 left-0 z-[50] w-full bg-white">
-      <div className="flex w-full items-center justify-between gap-4 px-6 py-3 md:h-[67px] md:px-12 md:py-0 lg:px-24 xl:px-40">
+      <div className="flex w-full items-center justify-between gap-8 px-6 py-3 md:h-[67px] md:px-12 md:py-0 lg:px-24 xl:px-40">
         <a
           href="#inicio"
           className="flex items-center h-[40px] md:h-full w-[220px] shrink-0"
@@ -37,7 +37,8 @@ export const NavigationMenuSection = () => {
           />
         </a>
 
-        <div className="hidden items-center gap-6 xl:flex">
+        {/* gap-6 → gap-10 para mayor separación entre links */}
+        <div className="hidden items-center gap-10 xl:flex">
           {navItems.map((item) => (
             <a
               key={item.label}
