@@ -1,4 +1,8 @@
-﻿const COUNTRY_CODES = [
+'use client';
+
+import type { FormEvent } from "react";
+
+const COUNTRY_CODES = [
   { code: "+54", label: "🇦🇷 +54" },
   { code: "+591", label: "🇧🇴 +591" },
   { code: "+55", label: "🇧🇷 +55" },
@@ -60,6 +64,37 @@
 ];
 
 export const ContactSection = () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+
+  const data = {
+    nombre: (form.nombre as HTMLInputElement).value,
+    apellido: (form.apellido as HTMLInputElement).value,
+    email: (form.email as HTMLInputElement).value,
+    codigo: (form.codigo as HTMLSelectElement).value,
+    telefono: (form.telefono as HTMLInputElement).value,
+    mensaje: (form.mensaje as HTMLTextAreaElement).value,
+  };
+
+  const res = await fetch("/api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (res.ok) {
+    console.log("Consulta enviada correctamente");
+    form.reset();
+  } else {
+    console.log("Error al enviar la consulta");
+  }
+};
+
+
   return (
     <section
       id="contacto"
@@ -116,13 +151,14 @@ export const ContactSection = () => {
           data-reveal="fade-up"
           style={{ ["--reveal-delay" as string]: "120ms" }}
         >
-          <form className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <label className="text-xs text-white/80">
               Nombre
               <input
                 className="mt-2 w-full rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/60 focus:border-white focus:outline-none"
                 placeholder="Su nombre"
                 type="text"
+                name="nombre"
               />
             </label>
 
@@ -132,6 +168,7 @@ export const ContactSection = () => {
                 className="mt-2 w-full rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/60 focus:border-white focus:outline-none"
                 placeholder="Su apellido"
                 type="text"
+                name="apellido"
               />
             </label>
 
@@ -141,6 +178,7 @@ export const ContactSection = () => {
                 className="mt-2 w-full rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/60 focus:border-white focus:outline-none"
                 placeholder="Su dirección de email"
                 type="email"
+                name="email"
               />
             </label>
 
@@ -150,6 +188,7 @@ export const ContactSection = () => {
                 <select
                   defaultValue="+54"
                   className="mt-2 w-full rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white focus:border-white focus:outline-none"
+                  name="codigo"
                 >
                   {COUNTRY_CODES.map(({ code, label }) => (
                     <option key={code} className="text-black" value={code}>
@@ -165,6 +204,7 @@ export const ContactSection = () => {
                   className="mt-2 w-full rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/60 focus:border-white focus:outline-none"
                   placeholder="Número de teléfono"
                   type="tel"
+                  name="telefono"
                 />
               </label>
             </div>
@@ -174,6 +214,7 @@ export const ContactSection = () => {
               <textarea
                 className="mt-2 min-h-[120px] w-full rounded-md border border-white/30 bg-white/10 px-3 py-2 text-sm text-white placeholder-white/60 focus:border-white focus:outline-none"
                 placeholder="Escriba su consulta aquí..."
+                name="mensaje"
               />
             </label>
 
