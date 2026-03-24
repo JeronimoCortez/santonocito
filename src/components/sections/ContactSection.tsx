@@ -1,6 +1,10 @@
-'use client';
+﻿'use client';
 
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import { toast } from "sonner";
+
+const WHATSAPP_HREF =
+  "https://wa.me/5492615325937?text=Hola!%20Santonocito%20y%20Asociados,%20necesito%20consultarles%20sobre%20sus%20servicios";
 
 const COUNTRY_CODES = [
   { code: "+54", label: "🇦🇷 +54" },
@@ -64,35 +68,109 @@ const COUNTRY_CODES = [
 ];
 
 export const ContactSection = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+    e.preventDefault();
+    if (isSubmitting) return;
 
-  const form = e.currentTarget;
+    setIsSubmitting(true);
+    const toastId = toast.loading("Enviando consulta...");
 
-  const data = {
-    nombre: (form.nombre as HTMLInputElement).value,
-    apellido: (form.apellido as HTMLInputElement).value,
-    email: (form.email as HTMLInputElement).value,
-    codigo: (form.codigo as HTMLSelectElement).value,
-    telefono: (form.telefono as HTMLInputElement).value,
-    mensaje: (form.mensaje as HTMLTextAreaElement).value,
+    const form = e.currentTarget;
+
+    const data = {
+      nombre: (form.nombre as HTMLInputElement).value,
+      apellido: (form.apellido as HTMLInputElement).value,
+      email: (form.email as HTMLInputElement).value,
+      codigo: (form.codigo as HTMLSelectElement).value,
+      telefono: (form.telefono as HTMLInputElement).value,
+      mensaje: (form.mensaje as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        toast.success("Consulta enviada", {
+          id: toastId,
+          description: (
+            <span className="text-sm">
+              ¡Gracias! Si querés hablar por WhatsApp ahora,{" "}
+              <a
+                href={WHATSAPP_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium underline underline-offset-2"
+              >
+                presiona acá
+              </a>
+              .
+            </span>
+          ),
+          duration: 9000,
+        });
+
+        form.reset();
+        return;
+      }
+
+      let serverMessage = "No pudimos enviar tu consulta en este momento.";
+      try {
+        const json = (await res.json()) as { message?: string };
+        if (json?.message) serverMessage = json.message;
+      } catch {
+        // ignore non-json responses
+      }
+
+      toast.error("Error al enviar", {
+        id: toastId,
+        description: (
+          <span className="text-sm">
+            {serverMessage} Si querés, escribinos por WhatsApp{" "}
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium underline underline-offset-2"
+            >
+              desde acá
+            </a>
+            .
+          </span>
+        ),
+        duration: 12000,
+      });
+    } catch {
+      toast.error("Error de conexión", {
+        id: toastId,
+        description: (
+          <span className="text-sm">
+            No se pudo conectar para enviar la consulta. Si querés, escribinos
+            por WhatsApp{" "}
+            <a
+              href={WHATSAPP_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium underline underline-offset-2"
+            >
+              desde acá
+            </a>
+            .
+          </span>
+        ),
+        duration: 12000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-
-  const res = await fetch("/api/contact", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-
-  if (res.ok) {
-    console.log("Consulta enviada correctamente");
-    form.reset();
-  } else {
-    console.log("Error al enviar la consulta");
-  }
-};
 
 
   return (
@@ -117,7 +195,7 @@ export const ContactSection = () => {
           </div>
 
           <a
-            href="https://wa.me/5492615325937?text=Hola!%20Santonocito%20y%20Asociados,%20necesito%20consultarles%20sobre%20sus%20servicios"
+            href={WHATSAPP_HREF}
             target="_blank"
             rel="noopener noreferrer"
             className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#caa081] px-6 py-3 text-sm font-medium text-white sm:w-fit"
@@ -220,9 +298,10 @@ export const ContactSection = () => {
 
             <button
               type="submit"
-              className="mt-2 w-full rounded-lg bg-[#caa081] px-6 py-3 text-sm font-medium text-white"
+              disabled={isSubmitting}
+              className="mt-2 w-full rounded-lg bg-[#caa081] px-6 py-3 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-70"
             >
-              Enviar consulta
+              {isSubmitting ? "Enviando..." : "Enviar consulta"}
             </button>
           </form>
         </div>
