@@ -11,7 +11,7 @@ const testimonials = [
   {
     id: 2,
     text: "Llegué a la doctora, a través de varias vías, ya que tanto una trabajadora social amiga me la sugirió, como así también la hija de otra amiga, a quien le había llevado su caso de familia, por lo que no dudé en contactarla. Tuve la bendición de encontrarme, no solo con una profesional afiladisima sobre derechos de la mujer y la protección de los niños, sino también con un ser humano que supo contenerme, motivarme y acompañarme en un proceso que para mí no era, ni fácil, ni simple, ni agradable, un divorcio y una división de bienes, fruto de una separación de más de 13 años sin acuerdos y que se resolvió en menos de un año. Mi eterna gratitud y mi super recomendación.",
-    author: "Crsitina",
+    author: "Cristina",
   },
   {
     id: 3,

@@ -67,7 +67,7 @@ export const Contenedor = () => {
               </div>
 
               <p className="flex items-center justify-center w-fit mt-[-1.00px] [font-family:'Roboto-Regular',Helvetica] font-normal text-[#5E4F4A] text-sm text-center leading-7 whitespace-normal break-words relative tracking-[0]">
-                +54 9 2615 325937 / +54 9 2615 53-1704
+                +54 9 2615 325937 / +54 9 2615 531704
               </p>
             </div>
 
