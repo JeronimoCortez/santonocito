@@ -185,7 +185,7 @@ export const ContactSection = () => {
         />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
+      <div className="layout-container relative grid w-full grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start lg:gap-12">
         <div className="flex w-full flex-col gap-6" data-reveal="fade-up">
           <div className="flex flex-col gap-2">
             <h2 className="text-[28px] font-semibold text-[#caa081] sm:text-[32px]">

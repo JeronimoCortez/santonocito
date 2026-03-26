@@ -51,8 +51,9 @@ export const SpecialtiesSection = () => {
   return (
     <section
       id="especialidades"
-      className="relative flex w-full scroll-mt-[90px] flex-col items-start gap-10 bg-[#ba95781a] px-6 py-16 sm:px-8 md:px-12 lg:px-24 lg:py-[100px] xl:flex-row xl:items-center xl:gap-4 2xl:gap-8 xl:px-40"
+      className="relative w-full scroll-mt-[90px] bg-[#ba95781a] px-6 py-16 sm:px-8 md:px-12 lg:px-24 lg:py-[100px] xl:px-40"
     >
+      <div className="layout-container flex w-full flex-col items-start gap-10 xl:flex-row xl:items-center xl:gap-4 2xl:gap-8">
       <div
         className="flex max-w-[400px] flex-col items-start gap-6 lg:flex-1"
         data-reveal="fade-up"
@@ -118,6 +119,7 @@ export const SpecialtiesSection = () => {
         })}
       </div>
 
+      </div>
     </section>
   );
 };

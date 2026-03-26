@@ -155,11 +155,12 @@ export const TestimonialsSection = () => {
   return (
     <section
       id="testimonios"
-      className="relative flex w-full scroll-mt-[90px] flex-col items-center justify-center gap-10 overflow-hidden bg-cover bg-center px-6 py-12 sm:px-8 md:px-12 lg:min-h-[832px] lg:gap-[60px] lg:px-24 lg:py-[60px] xl:px-40"
+      className="relative flex w-full scroll-mt-[90px] items-center justify-center overflow-hidden bg-cover bg-center px-6 py-12 sm:px-8 md:px-12 lg:min-h-[832px] lg:px-24 lg:py-[60px] xl:px-40"
       style={{ backgroundImage: "url('/testimonios-fondo.webp')" }}
     >
       <div className="absolute inset-0 bg-[#BA9578]/10" />
 
+      <div className="layout-container relative z-10 flex w-full flex-col items-center justify-center gap-10 lg:gap-[60px]">
       <div
         className="relative z-10 flex w-full flex-col items-center gap-6"
         data-reveal="fade-up"
@@ -257,6 +258,7 @@ export const TestimonialsSection = () => {
       </div>
 
 
+      </div>
     </section>
   );
 };

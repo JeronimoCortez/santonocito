@@ -19,7 +19,8 @@ const cards = [
 
 export const LegalConsultationSection = () => {
   return (
-    <div className="relative flex w-full flex-col items-start gap-10 overflow-hidden px-6 py-12 sm:px-8 md:px-12 lg:px-24 lg:py-[60px] xl:min-h-[536px] xl:flex-row xl:items-center justify-between xl:gap-24 2xl:gap-[203px] xl:px-40">
+    <section className="relative w-full overflow-hidden px-6 py-12 sm:px-8 md:px-12 lg:px-24 lg:py-[60px] xl:flex xl:min-h-[536px] xl:items-center xl:justify-center xl:px-40">
+      <div className="layout-container relative flex w-full flex-col items-start gap-10 xl:flex-row xl:items-center justify-between xl:gap-24 2xl:gap-[203px]">
       <div
         className="flex w-full flex-col items-start gap-6 xl:w-[464px]"
         data-reveal="fade-up"
@@ -67,6 +68,7 @@ export const LegalConsultationSection = () => {
           </div>
         ))}
       </div>
-    </div>
+      </div>
+    </section>
   );
 };

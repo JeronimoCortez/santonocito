@@ -32,7 +32,7 @@ export const Contenedor = () => {
           className="relative w-full bg-transparent px-2 py-4 "
           // data-reveal="fade-up"
         >
-          <div className="mx-auto flex w-full max-w-[var(--layout-max)] flex-wrap items-center justify-center gap-4 lg:flex-nowrap lg:gap-5">
+          <div className="mx-auto flex w-full max-w-[var(--layout-max)] flex-wrap items-center justify-center 2xl:justify-between gap-4 lg:flex-nowrap lg:gap-5">
             <p className="flex items-center justify-center w-fit [font-family:'Roboto-Regular',Helvetica] font-normal text-[#5E4F4A] text-sm text-center leading-7 whitespace-normal break-words relative tracking-[0]">
               © 2023 Santonocito &amp; Asociados
             </p>

@@ -27,8 +27,9 @@ export const WhyChooseUsSection = () => {
   return (
     <section
       id="por-que"
-      className="relative flex w-full scroll-mt-[90px] flex-col items-center justify-center gap-10 overflow-hidden bg-[#faf8f7] px-6 py-12 sm:px-8 md:px-12 lg:min-h-[614px] lg:gap-[60px] lg:px-24 lg:py-[60px] xl:px-40"
+      className="relative flex w-full scroll-mt-[90px] items-center justify-center overflow-hidden bg-[#faf8f7] px-6 py-12 sm:px-8 md:px-12 lg:min-h-[614px] lg:px-24 lg:py-[60px] xl:px-40"
     >
+      <div className="layout-container flex w-full flex-col items-center justify-center gap-10 lg:gap-[60px]">
       <div
         className="flex w-full flex-col items-center gap-6"
         data-reveal="fade-up"
@@ -71,6 +72,7 @@ export const WhyChooseUsSection = () => {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </section>
   );
